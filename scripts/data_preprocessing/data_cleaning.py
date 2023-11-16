@@ -15,3 +15,7 @@ def extract_columns_by_threshold(df, threshold_percentage):
     df_extracted = df[columns_to_extract].copy()
 
     return df_extracted
+
+
+def is_repeating_sequence(value):
+    return bool(re.match(r'^(7+|9+)$', str(value)))
