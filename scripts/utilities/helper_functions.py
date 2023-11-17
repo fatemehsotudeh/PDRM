@@ -101,3 +101,21 @@ def convert_float_to_int(value):
     if isinstance(value, float) and value.is_integer():
         return int(value)
     return value
+
+
+def extract_X_columns(df):
+    """
+    Extract numerical columns from the DataFrame.
+
+    Parameters:
+    - df: The DataFrame to extract numerical columns from.
+
+    Returns:
+    - numerical_columns: DataFrame containing only numerical columns.
+    """
+    df_numerical = df.select_dtypes(include=['int', 'float'])
+    return list(df_numerical.columns)
+
+
+
+
