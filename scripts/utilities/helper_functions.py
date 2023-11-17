@@ -58,3 +58,46 @@ def save_files(data_frames, *file_names, base_path=None, file_format='csv'):
             df.to_excel(full_path, index=False)
         else:
             raise ValueError("Unsupported file format. Use 'csv' or 'xlsx'.")
+
+
+def extract_categorical_columns(df):
+    """
+    Extract categorical columns from the DataFrame.
+
+    Parameters:
+    - df: The DataFrame to extract categorical columns from.
+
+    Returns:
+    - categorical_columns: DataFrame containing only categorical columns.
+    """
+    df_categorical = df.select_dtypes(include=['object'])
+    return list(df_categorical.columns)
+
+
+def extract_numerical_columns(df):
+    """
+    Extract numerical columns from the DataFrame.
+
+    Parameters:
+    - df: The DataFrame to extract numerical columns from.
+
+    Returns:
+    - numerical_columns: DataFrame containing only numerical columns.
+    """
+    df_numerical = df.select_dtypes(include=['int', 'float'])
+    return list(df_numerical.columns)
+
+
+def convert_float_to_int(value):
+    """
+    Converts a floating-point number to an integer if it is a whole number.
+
+    Parameters:
+    - value (float): The input floating-point number.
+
+    Returns:
+    - int or float: If the input is a whole number, returns the integer representation; otherwise, returns the original value.
+    """
+    if isinstance(value, float) and value.is_integer():
+        return int(value)
+    return value
