@@ -3,16 +3,6 @@ import pandas as pd
 
 
 def read_files(*file_names, base_path=None):
-    """
-    Read multiple files (CSV or Excel) and return a list of DataFrames.
-
-    Parameters:
-    - *file_names: Variable number of file names relative to the base path
-    - base_path (str or None): Base path for the files. If None, uses a default base path.
-
-    Returns:
-    - dfs (list): List of DataFrames.
-    """
     default_base_path = '../../data/raw_data/'
 
     if base_path is None:
@@ -34,16 +24,6 @@ def read_files(*file_names, base_path=None):
 
 
 def save_files(data_frames, *file_names, base_path=None, file_format='csv'):
-    """
-    Save multiple DataFrames to files (CSV or Excel).
-
-    Parameters:
-    - data_frames (list): List of DataFrames to be saved.
-    - *file_names: Variable number of file names relative to the base path.
-    - base_path (str or None): Base path for the files. If None, uses a default base path.
-    - file_format (str): File format for saving ('csv' or 'xlsx').
-
-    """
     default_base_path = '../../data/processed_data/'
 
     if base_path is None:
@@ -61,58 +41,22 @@ def save_files(data_frames, *file_names, base_path=None, file_format='csv'):
 
 
 def extract_categorical_columns(df):
-    """
-    Extract categorical columns from the DataFrame.
-
-    Parameters:
-    - df: The DataFrame to extract categorical columns from.
-
-    Returns:
-    - categorical_columns: DataFrame containing only categorical columns.
-    """
     df_categorical = df.select_dtypes(include=['object'])
     return list(df_categorical.columns)
 
 
 def extract_numerical_columns(df):
-    """
-    Extract numerical columns from the DataFrame.
-
-    Parameters:
-    - df: The DataFrame to extract numerical columns from.
-
-    Returns:
-    - numerical_columns: DataFrame containing only numerical columns.
-    """
     df_numerical = df.select_dtypes(include=['int', 'float'])
     return list(df_numerical.columns)
 
 
 def convert_float_to_int(value):
-    """
-    Converts a floating-point number to an integer if it is a whole number.
-
-    Parameters:
-    - value (float): The input floating-point number.
-
-    Returns:
-    - int or float: If the input is a whole number, returns the integer representation; otherwise, returns the original value.
-    """
     if isinstance(value, float) and value.is_integer():
         return int(value)
     return value
 
 
 def extract_X_columns(df):
-    """
-    Extract numerical columns from the DataFrame.
-
-    Parameters:
-    - df: The DataFrame to extract numerical columns from.
-
-    Returns:
-    - numerical_columns: DataFrame containing only numerical columns.
-    """
     df_numerical = df.select_dtypes(include=['int', 'float'])
     return list(df_numerical.columns)
 
