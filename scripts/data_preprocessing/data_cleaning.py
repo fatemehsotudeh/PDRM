@@ -35,6 +35,13 @@ def replace_repeating_sequence(df, columns, strategy='median', sequence_values=N
     return df
 
 
+def replace_target_repeating_sequence_with_constant(df, columns, constant_value, sequence_values=None):
+    for col in columns:
+        df[col] = df[col].apply(
+            lambda x: constant_value if is_repeating_sequence(convert_float_to_int(x), sequence_values) else x)
+    return df
+
+
 def statistical_imputer(df, columns, strategy='median'):
     # Validate the imputation strategy
     valid_strategies = ['mean', 'median', 'most_frequent']
