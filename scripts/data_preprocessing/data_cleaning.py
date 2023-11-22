@@ -79,3 +79,17 @@ def drop_constant_columns(df):
 
 def drop_duplicates(df):
     return df.drop_duplicates()
+
+
+def remove_outliers(df, outlier_threshold=1.5, column_outlier_percentage_threshold=40):
+    Q1 = df.quantile(0.25)
+    Q3 = df.quantile(0.75)
+    IQR = Q3 - Q1
+
+    outliers = ((df < (Q1 - outlier_threshold * IQR)) | (df > (Q3 + outlier_threshold * IQR))).sum(axis=0) / len(
+        df) * 100
+
+    columns_to_drop_outliers = outliers[outliers > column_outlier_percentage_threshold].index
+    df = df.drop(columns=columns_to_drop_outliers)
+
+    return df
